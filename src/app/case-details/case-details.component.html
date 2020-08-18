@@ -1,0 +1,45 @@
+
+
+<!-- <div class="container"><h2>Example 3 </h2></div> -->
+<div id="exTab3" class="tab-container">
+
+  <!-- <div> -->
+    <ul class="nav nav-tabs" style="margin-left: 15px;">
+      <li [ngClass]="!toggle ? 'active' : ''">
+        <a  data-toggle="tab" (click)="onCPSelect('ce')">CE</a>
+      </li>
+      <li [ngClass]="toggle ? 'active' : ''"><a data-toggle="tab" (click)="onCPSelect('cp')">CP</a>
+      </li>
+    </ul>
+    <div class="col-lg-12" style="display: inline-flex;
+      width: 100%;">
+      <div class="tab-content clearfix col-lg-6">
+        <div class="tab-pane" id="1b" *ngIf="!toggle" [ngClass]="!toggle ? 'active' : ''">
+          <ul class="tree">
+            <li *ngFor="let item of cliexams" (click)="onSelect(item)">
+              <span class="badge">{{item.expr}}</span>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="tab-pane" id="2b" *ngIf="toggle"[ngClass]="toggle ? 'active' : ''">
+          <ul class="tree">
+            <li *ngFor="let item of clinSymptoms" (click)="onSelect(item)">
+              <span class="badge">{{item.expr}}</span>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 selected-tab-content">
+        <div>
+         {{selectedItem}}
+        </div>
+      </div>
+    </div>
+<!-- 
+  </div> -->
+
+
+
+</div>

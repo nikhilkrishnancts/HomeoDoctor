@@ -1,0 +1,87 @@
+input[type=text] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
+input:focus{
+    outline: none;
+    border:none;
+    border-bottom: outset;
+}
+
+  #exTab3 .nav-tabs > li{
+    border-radius: 4px 4px 0 0 ;
+    background-color: #d8e850;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 10px;
+    font-size: 17px;
+    width: 10%;    
+  }
+
+  #exTab3 .nav-tabs > .active {
+    border-radius: 4px 4px 0 0 ;
+    background-color: #6e8000 !important;
+  }
+
+  #exTab3 .tab-content {
+    color : white;
+    // background-color: #428bca;
+    padding : 5px 15px;
+    border: 2px solid #6c757d;
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  .selected-tab-content{
+    padding : 5px 15px;
+    border: 2px solid #6c757d;
+    height: 400px;
+    overflow-y: auto;
+      
+  }
+
+ 
+
+  .tab-content > .active{
+    display: inline-flex;
+  }
+
+ul.tree, ul.tree ul {
+    list-style: none;
+     margin: 0;
+     padding: 0;
+   } 
+   ul.tree ul {
+     margin-left: 10px;
+   }
+   ul.tree li {
+     margin: 0;
+     padding: 0 7px;
+     line-height: 20px;
+     color: #369;
+     font-weight: bold;
+     border-left:1px solid rgb(100,100,100);
+cursor: pointer;
+   }
+   ul.tree li:last-child {
+       border-left:none;
+   }
+   ul.tree li:before {
+      position:relative;
+      top:-0.3em;
+      height:1em;
+      width:12px;
+      color:white;
+      border-bottom:1px solid rgb(100,100,100);
+      content:"";
+      display:inline-block;
+      left:-7px;
+   }
+   ul.tree li:last-child:before {
+      border-left:1px solid rgb(100,100,100);   
+   }
+  

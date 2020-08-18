@@ -1,0 +1,65 @@
+<loading *ngIf="loadedFlag">{{ isLoading }}</loading>
+<div id="wrapper"  [ngClass]="ref.click === true? 'toggled' :''" *ngIf="!loadedFlag" >
+  <div class="overlay" [ngStyle]="{disply:ref.click === true? 'block' :'none'}" ></div>
+
+  <!-- Sidebar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+      <ul class="nav sidebar-nav">
+          <li class="sidebar-brand">
+  <div class="brand">
+    Patient <span style="font-style: italic;">Data</span> 
+  </div>
+          </li>
+          <li>
+            <a href="#" *ngFor= "let value of navList; let index;" (click)="navSelection(value)"
+            [ngClass]="(value == selectedTab)? 'active': ''" class="dropdown-toggle" data-toggle="dropdown">
+              {{value}}<span class="caret" *ngIf="selectedTab == 'Search'"></span>
+           </a>
+          </li>
+          <li class="dropdown" *ngIf="selectedTab == 'Search'">
+            <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a> -->
+            <ul class="dropdown-menu" role="menu">
+              <li><a class="padding-dropdown">Disease Search </a></li>
+              <li><a class="padding-dropdown">Another action</a></li>
+            </ul>
+          </li>
+      </ul>
+  </nav>
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div  appSidebar  #ref="appSidebar" id="page-content-wrapper"></div>
+  <div style="background-color: #d8e850; margin-left: -10px; padding: 20px;"></div>
+  <div style="padding-top: 10px;">
+
+
+      <div class="">
+          <div class="">
+            <div style="float: right;">
+              {{currentTime | date:'MM/dd/yy h:mm:ss a' }}
+            </div>
+            <div class="col-lg-10 col-lg-offset-2" style="padding-top: 30px;margin-bottom: 10px;">
+              <input type="text" placeholder="Registration No" [(ngModel)]="registrationNumber" />&nbsp;&nbsp;
+              <input type="text" placeholder="Name" />&nbsp;&nbsp;
+              <input type="text" placeholder="Age" />&nbsp;&nbsp;
+              <input type="text" placeholder="Gender" />
+            </div>
+            <div *ngIf="selectedTab == 'Case Details'">
+              <app-case-details [registrationNumber]="registrationNumber"></app-case-details>
+            </div>
+            <div *ngIf="selectedTab == 'Search'">
+              <app-disease-search></app-disease-search>
+            </div>
+            <div *ngIf="selectedTab == 'Disease Readable'">
+              <app-readable></app-readable>
+            </div>
+            <div *ngIf="selectedTab == 'Repet'">
+              <app-repertory></app-repertory>
+            </div>
+          </div>
+      </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->

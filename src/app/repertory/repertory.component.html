@@ -1,0 +1,115 @@
+<loading *ngIf="loadedFlag">{{ isLoading }}</loading>
+<div *ngIf="!loadedFlag">
+  <div class="col-lg-10 col-lg-offset-2" style="padding-top: 30px;">
+    <span>Books</span>&nbsp;&nbsp;
+    <select [(ngModel)]="selectedBook" (change)="onSelected()">
+      <option>Select</option>
+      <option *ngFor="let item of bookList;let i = index" value="{{item.id}}" [selected]="i==0" [ngValue]="item.id">
+        {{item.name}}
+      </option>
+    </select>
+
+    <span>Chapter</span>&nbsp;&nbsp;
+    <select [(ngModel)]="selectedChapter" (change)="onSelectedChapter()">
+      <option>Select</option>
+      <option *ngFor="let chapter of updatedChapter;let i = index" value="{{chapter.id}}" [selected]="i==0"
+        [ngValue]="chapter.id">
+        {{chapter.name}}
+      </option>
+    </select>
+    <button class="button" (click)="searchSymptom()">Search</button>
+  </div>
+</div>
+<div style="text-align:center">
+  <input (input)="onInputChange($event)" class="input" value={{value}}
+    placeholder="Tap on the virtual keyboard to start" />
+  <div class="simple-keyboard"></div>
+</div>
+
+<!-- <div class="container"><h2>Example 3 </h2></div> -->
+<div id="exTab3" class="tab-container" *ngIf="!loadedFlag">
+
+  <!-- <div> -->
+  <!-- <ul class="nav nav-pills readable-tabs">
+        <li [ngClass]="!toggle ? 'active' : ''">
+          <a  data-toggle="tab" (click)="onCPSelect('ce')">CE</a>
+        </li>
+      </ul> -->
+  <div class="col-lg-12" style="display: inline-flex;
+        width: 100%;">
+    <div class="tab-content clearfix col-lg-6">
+      <div class="tab-pane active" id="1b" *ngIf="toggle">
+        <ul class="tree" *ngIf="childList.length > 0">
+          <li *ngFor="let item of childList;" (click)="onSelect(item)">
+            <span class="badge"> {{item._symptom}}</span>
+
+            <ul *ngIf="item.children.length > 0">
+              <ng-container *ngFor="let item2 of item.children;">
+                <li style="color: green;">
+                  <span class="badge"> {{item2._symptom}}</span>
+
+
+                  <ul *ngIf="item2.children.length > 0">
+                    <ng-container *ngFor="let item3 of item2.children;">
+                      <li style="color: red;">
+                        <span class="badge"> {{item3._symptom}}</span>
+
+                        <!-- <span *ngIf="item1 == item2.parent">
+                    {{item2.symptom}}
+                  </span> -->
+                      </li>
+                    </ng-container>
+
+                  </ul>
+                </li>
+              </ng-container>
+
+            </ul>
+          </li>
+          <!-- <li>10 objects
+                <ul>
+                 <li>4 Type a
+                 </li>
+                 <li>4 Type b
+                 </li>
+                 <li>4 Type c
+                 </li>
+                </ul>
+               </li> -->
+
+        </ul>
+      </div>
+      <!-- <div class="tab-pane" id="2b" *ngIf="toggle"[ngClass]="toggle ? 'active' : ''">
+            <ul class="tree">
+              <li *ngFor="let item of clinSymptoms" (click)="onSelect(item)">
+                <span class="badge">{{item.expr}}</span>
+              </li>
+              
+            </ul>
+          </div> -->
+    </div>
+    <div class="col-lg-6 selected-tab-content">
+      <!-- <div> -->
+
+      <ul *ngIf="symptomListID.length > 0">
+        <ng-container *ngFor="let sympList of symptomListID;">
+          <ng-container *ngFor="let drug of drugsList;">
+            <li *ngIf="drug.id == sympList.drugId" style="text-align: left;">
+              <span class="badge"> {{drug.name}}</span>
+
+              <!-- <span *ngIf="item1 == item2.parent">
+                  {{item2.symptom}}
+                </span> -->
+            </li>
+          </ng-container>
+        </ng-container>
+      </ul>
+      <!-- </div> -->
+    </div>
+  </div>
+  <!-- 
+    </div> -->
+
+
+
+</div>
