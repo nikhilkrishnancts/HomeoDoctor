@@ -116,7 +116,7 @@ ul.tree, ul.tree ul {
   .fix {
     position: absolute;
     *position: relative; /*ie7*/
-    margin-left: -126px;
+    // margin-left: -126px;
     width: 300px;
   }
   .outer {
@@ -125,10 +125,10 @@ ul.tree, ul.tree ul {
   .inner {
     overflow-x: scroll;
     overflow-y: visible;
-    width: 700px; 
+    width: 800px; 
     margin-left: 190px;
   }
 
-  table, td {
-    border: 1px solid black;
-  }
+  // table, td {
+  //   border: 1px solid black;
+  // }

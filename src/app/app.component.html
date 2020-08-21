@@ -29,7 +29,7 @@
 
   <!-- Page Content -->
   <div  appSidebar  #ref="appSidebar" id="page-content-wrapper"></div>
-  <div style="background-color: #d8e850; margin-left: -10px; padding: 20px;"></div>
+  <div style="background-color: #20201c; margin-left: -10px; padding: 20px;"></div>
   <div style="padding-top: 10px;">
 
 
@@ -39,8 +39,8 @@
               {{currentTime | date:'MM/dd/yy h:mm:ss a' }}
             </div>
             <div class="col-lg-10 col-lg-offset-2" style="padding-top: 30px;margin-bottom: 10px;">
-              <input type="text" placeholder="Registration No" [(ngModel)]="registrationNumber" />&nbsp;&nbsp;
               <input type="text" placeholder="Name" />&nbsp;&nbsp;
+              Reg. No : <input type="text" placeholder="Registration No" [(ngModel)]="registrationNumber" />&nbsp;&nbsp;
               <input type="text" placeholder="Age" />&nbsp;&nbsp;
               <input type="text" placeholder="Gender" />
             </div>

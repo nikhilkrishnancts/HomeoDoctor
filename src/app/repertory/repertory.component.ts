@@ -23,6 +23,7 @@ export class RepertoryComponent implements OnInit {
   updatedChapter: any;
   symptomList: any;
   updatedSymptomList: any =[];
+  drugLevelLists: any = [];
   toggle: boolean = false;
   childList: any = [];
   arrayToTree: (items: any) => any[];
@@ -40,18 +41,19 @@ export class RepertoryComponent implements OnInit {
   drugupdatedList: any;
   symptomId: any;
   updateddrugList: any= [];
+  newDrugsList: any = [];
 
   constructor(private databaseService: DatabaseService, private appService: AppService) {
     this.databaseService.connection.then(async connection => {
-      connection.manager.find(Symptom).then(
-        symptom => {
-          this.appService.setSymptomList(symptom)
+      // connection.manager.find(Symptom).then(
+      //   symptom => {
+      //     this.appService.setSymptomList(symptom)
 
-          this.updatedSymptomList = this.symptomList = this.appService.getSymptomList();
-          // console.log('mkm'+ chapter);
+      //     this.updatedSymptomList = this.symptomList = this.appService.getSymptomList();
+      //     // console.log('mkm'+ chapter);
 
-        }
-      )
+      //   }
+      // )
 
       connection.manager.find(Drugs).then(
         drugs => {
@@ -93,6 +95,8 @@ export class RepertoryComponent implements OnInit {
 
   addtoList(){
 this.medicineList.push(this.selectedItem);
+this.drugLevelLists.push(this.getArray(this.symptomListID));
+this.newDrugsList.push(this.updateddrugList);
   }
 
   showTable(){
