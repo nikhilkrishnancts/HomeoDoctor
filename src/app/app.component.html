@@ -44,16 +44,18 @@
               <input type="text" placeholder="Age" />&nbsp;&nbsp;
               <input type="text" placeholder="Gender" />
             </div>
-            <div *ngIf="selectedTab == 'Case Details'">
-              <app-case-details [registrationNumber]="registrationNumber"></app-case-details>
-            </div>
-            <div *ngIf="selectedTab == 'Search'">
+            
+            
+            <div *ngIf="selectedTab == 'Case Details' ">
               <app-disease-search></app-disease-search>
+            </div>
+            <div *ngIf="selectedTab == 'Disease Search'">
+              <app-case-details [registrationNumber]="registrationNumber"></app-case-details>
             </div>
             <div *ngIf="selectedTab == 'Disease Readable'">
               <app-readable></app-readable>
             </div>
-            <div *ngIf="selectedTab == 'Repet'">
+            <div *ngIf="selectedTab == 'Repertories' && symtom2drugslist.length > 0">
               <app-repertory></app-repertory>
             </div>
           </div>

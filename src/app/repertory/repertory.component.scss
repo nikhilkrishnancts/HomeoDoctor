@@ -102,4 +102,33 @@ ul.tree, ul.tree ul {
    ul.tree li:last-child:before {
       border-left:1px solid rgb(100,100,100);   
    }
-  
+   table {
+    table-layout: fixed; 
+    width: 100%;
+    *margin-left: -100px; /*ie7*/
+  }
+  td, th {
+    vertical-align: top;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    width: 100px;
+  }
+  .fix {
+    position: absolute;
+    *position: relative; /*ie7*/
+    margin-left: -126px;
+    width: 300px;
+  }
+  .outer {
+    position: relative;
+  }
+  .inner {
+    overflow-x: scroll;
+    overflow-y: visible;
+    width: 700px; 
+    margin-left: 190px;
+  }
+
+  table, td {
+    border: 1px solid black;
+  }

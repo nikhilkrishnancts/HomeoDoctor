@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import Keyboard from "simple-keyboard";
-import { FilterPipe } from '../app.pipe';
+// import { FilterPipe } from '../app.pipe';
 import { DatabaseService } from '../data-access/database.service';
 import { Symptom } from '../data-access/entities/symptoms';
 import { Sym2drugs } from '../data-access/entities/symptom2drug';
@@ -11,7 +11,7 @@ import { Drugs } from '../data-access/entities/drugs';
   selector: 'app-repertory',
   templateUrl: './repertory.component.html',
   styleUrls: ['./repertory.component.scss'],
-  providers: [FilterPipe]
+  // providers: [FilterPipe]
 })
 export class RepertoryComponent implements OnInit {
   bookList: any;
@@ -22,7 +22,7 @@ export class RepertoryComponent implements OnInit {
   chapterList: any;
   updatedChapter: any;
   symptomList: any;
-  updatedSymptomList: any;
+  updatedSymptomList: any =[];
   toggle: boolean = false;
   childList: any = [];
   arrayToTree: (items: any) => any[];
@@ -32,6 +32,14 @@ export class RepertoryComponent implements OnInit {
   selectedSymptom: any;
   symptomListID: any = [];
   updatedSymptomList2: any = [];
+  selectedItem: any;
+  medicineList: any= [];
+  showTableFlag: boolean = false;
+  selectedChapterName: any;
+  selectedBookName: any;
+  drugupdatedList: any;
+  symptomId: any;
+  updateddrugList: any= [];
 
   constructor(private databaseService: DatabaseService, private appService: AppService) {
     this.databaseService.connection.then(async connection => {
@@ -44,27 +52,20 @@ export class RepertoryComponent implements OnInit {
 
         }
       )
-      connection.manager.find(Sym2drugs).then(
-        symptom2drug => {
-          this.appService.setSymptom2drugs(symptom2drug)
-          this.symptom2drugs = symptom2drug;
-          // console.log('mkm'+ chapter);
-          // this.loadedFlag = true;
-          this.loadedFlag = false;
-        }
-      )
+
       connection.manager.find(Drugs).then(
         drugs => {
           this.appService.setDrugs(drugs);
           this.drugsList = drugs;
-          console.log('mkm' + drugs);
-          // this.loadedFlag = false;
+          // console.log('mkm' + drugs);
+          this.loadedFlag = false;
         }
       )
     })
   }
 
   ngOnInit() {
+    this.symptom2drugs = this.appService.getSymptom2drugs();
     this.bookList = this.appService.getBooks();
     this.updatedChapter = this.chapterList = this.appService.getChapter();
   }
@@ -76,7 +77,8 @@ export class RepertoryComponent implements OnInit {
     });
   }
 
-  onSelected() {
+  onSelected(event) {
+    this.selectedBookName = event.target.options[this.selectedBook].innerText;
     // console.log(this.selectedBook);
     let selectedId = this.selectedBook;
     this.updatedChapter = this.chapterList.filter(function (number) {
@@ -84,17 +86,70 @@ export class RepertoryComponent implements OnInit {
     });
 
   }
-  onSelectedChapter() {
+  onSelectedChapter(event) {
+    this.selectedChapterName= event.target.options[this.selectedChapter].innerText;
     console.log(this.selectedChapter)
   }
+
+  addtoList(){
+this.medicineList.push(this.selectedItem);
+  }
+
+  showTable(){
+    //     this.drugupdatedList = this.drugsList.filter(function (number) {
+    //   return (number.id == this.selectedItem.drugId );
+    // });
+this.showTableFlag = true;
+  }
   onSelect(item) {
-    let symptomid = item._id;
+    // this.loadedFlag = true;
+    this.selectedItem= item;
+    let symptomid =this.symptomId=  item._id;
+    
     let selectedId = this.selectedBook;
     let selectChapter = this.selectedChapter;
     this.symptomListID = this.symptom2drugs.filter(function (number) {
-      return (number.bookId === selectedId && number.chapterId === selectChapter && number.symptomId == symptomid);
+      return (number.bookId == selectedId && number.chapterId == selectChapter && number.symptomId == symptomid);
     });
-
+ 
+    
+    // this.databaseService.connection.then(async connection => {
+    // const qb = connection.createQueryBuilder().select("sym") 
+    // .from(Sym2drugs, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
+    // .andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).andWhere("sym.symptomId = :symptomId", {symptomId: symptomid}).getMany();
+    
+    //     qb.then( async response => {
+    //       console.log("in check:" +response)
+    //       this.symptomListID = response;
+    //       if (this.symptomListID.length)
+    //      //  this.childList = this.getTree();
+    //       this.loadedFlag = false;
+    //     });
+    //   });  
+      
+      if (this.symptomListID.length){
+        // this.loadedFlag = false;
+        // let drugone ;
+        // let druglst = this.drugsList;
+        // let updateddruglist = this.updateddrugList;
+        // this.updateddrugList = updateddruglist;
+        this.updateddrugList = this.drugsList.filter((elem) => this.symptomListID.find(({ drugId }) => elem.id === drugId));
+        // this.symptomListID.filter(function (number) {
+        //  drugone = druglst.filter(function(drug){
+        //      (drug.id == number.drugId);
+        //  }
+        //   )
+        //   if(drugone.length)
+        //   updateddruglist.push(drugone);
+          
+        // });
+        if(this.updateddrugList.length){
+         //  this.updateddrugList = updateddruglist;
+          this.loadedFlag = false;
+        }
+      }
+      
+      
     console.log(item);
   }
 
@@ -104,22 +159,56 @@ export class RepertoryComponent implements OnInit {
     let selectChapter = this.selectedChapter;
     this.childList = [];
     console.log("in 23")
-    this.updatedSymptomList = this.symptomList.filter(function (number) {
-      return (number.bookId === selectedId && number.chapterId === selectChapter);
-    });
-    this.updatedSymptomList2 = this.symptom2drugs.filter(function (number) {
-      return (number.bookId === selectedId && number.chapterId === selectChapter);
-    });
-    console.log("in 2")
-    // this.updatedSymptomList.filter(function(item){
-    //   if(item.parent > 0 ){
-    //     childSelected.push(item)
-    //   }
-    // })
-    // this.childList.push(childSelected);
-    // this.childList = this.treeify(this.updatedSymptomList, 'id', 'parent', '');
-    if (this.updatedSymptomList.length)
+    // this.updatedSymptomList = this.symptomList.filter(function (number) {
+    //   return (number.bookId === selectedId && number.chapterId === selectChapter);
+    // });
+    
+    this.loadedFlag = true;
+
+    
+    this.databaseService.connection.then(async connection => {
+    //   const symptomLst = new Symptom();
+    /*const user = connection.createQueryBuilder() 
+    .select("sym") 
+    .from(Symptom, "sym") 
+    .where("sym.id = :id", { id: 1 }) .getOne();
+    qb.andWhere("account.password = :password", {password: password});*/
+
+    const qb = connection.createQueryBuilder().select("sym") 
+.from(Symptom, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
+.andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).getMany();
+
+    qb.then( async response => {
+      console.log("in check:" +response)
+      this.updatedSymptomList = response;
+      if (this.updatedSymptomList.length)
       this.childList = this.getTree();
+      this.loadedFlag = false;
+    });
+    
+    // const sym2drugs = new Sym2drugs();
+    // sym2drugs.bookId = selectedId;
+    // sym2drugs.chapterId = selectChapter;
+    // await connection.manager.save(sym2drugs);
+    let symptomRepository = connection.getRepository(Symptom);
+    let photoRepository = connection.getRepository(Sym2drugs);
+    //let photos = await photoRepository.find({ bookId: selectedId, chapterId: selectChapter });
+    // let symptom2drug = await photoRepository.find({ bookId: selectedId, chapterId: selectChapter })
+    //symptomRepository.find({ bookId:  Equal(selectedId), chapterId: Equal(selectChapter) })
+    //.then(async response1 => {
+      //this.updatedSymptomList = response1;
+      //this.loadedFlag = false;
+    // });
+    // photoRepository.find({ bookId: selectedId, chapterId: selectChapter })
+    // .then(async response => {
+    //       // const symptom2drug = await Sym2drugs.find();
+    //       this.updatedSymptomList2 = this.symptom2drugs = response;
+    //       this.loadedFlag = false;
+    //         }
+    //       )
+    });
+    
+    
 
     console.log("in 4" + this.childList)
     this.toggle = true;
@@ -226,53 +315,6 @@ export class RepertoryComponent implements OnInit {
     return arrayToTree(this.updatedSymptomList, this.symptom2drugs, this.drugsList);
 
   }
-  // treeify(list, idAttr, parentAttr, childrenAttr) {
-  //   if (!idAttr) idAttr = 'id';
-  //   if (!parentAttr) parentAttr = 'parent';
-  //   if (!childrenAttr) childrenAttr = 'children';
-  //   var treeList = [];
-  //   var lookup = {};
-  //   console.log("8");
-  //   list.forEach(function (obj) {
-  //     lookup[obj[idAttr]] = obj;
-  //     obj[childrenAttr] = [];
-  //   });
-  //   console.log("176");
-  //   // let listUpdated = [];
-  //   // listUpdated = list;
-  //   //let child = [];
-  //   for (let i = 0; i <= list.length; i++) {
-  //     // console.log(i);
-  //     if (list[i] && list[i].id) {
-  //       let id = list[i].id;
-  //       for (let j = 0; j <= list.length; j++) {
-  //         if (list[j] && list[j].parent && list[j].parent == id) {
-  //           lookup[i].children.push(list[j]);
-  //         }
-  //       }
-  //     }
-
-
-  //   }
-  //   // list.forEach(function(obj) {
-  //   //  // console.log("kolp"+ obj);
-
-  //   //     if (lookup[obj[parentAttr]+ 1] != null) {
-  //   //       child = listUpdated.filter(function(number) {
-  //   //         return (number.id === obj[parentAttr]+1);
-  //   //       });
-  //   //       lookup[obj[parentAttr]+ 1].children.push(child);
-  //   //       // console.log("kol" + lookup[obj[parentAttr]][childrenAttr]);
-  //   //         // lookup[obj[parentAttr]].childrenAttr.push(obj);
-  //   //     } else {
-  //   //         treeList.push(obj);
-  //   //     }
-  //   // });
-  //   console.log("mikk" + lookup);
-  //   treeList = this.getArray(lookup);
-  //   console.log(treeList);
-  //   return treeList;
-  // };
 
   getArray(obj: any) {
     if (Array.isArray(obj)) {

@@ -10,6 +10,8 @@ import { Clinsymptoms } from './data-access/entities/cp';
 import { Diseases } from './data-access/entities/diseases';
 import { Chapter } from './data-access/entities/chapters';
 import { async } from '@angular/core/testing';
+import { Drugs } from './data-access/entities/drugs';
+import { Sym2drugs } from './data-access/entities/symptom2drug';
 
 
 
@@ -24,9 +26,20 @@ export class AppComponent implements OnInit {
   registrationNumber: any;
   loadedFlag : boolean = true;
     currentTime: Date;
+    symtom2drugslist:any = [];
 
   constructor(private databaseService: DatabaseService, private appService: AppService) {
     this.databaseService.connection.then(async connection =>{
+        
+      connection.manager.find(Sym2drugs).then(
+        drugs => {
+          this.symtom2drugslist =drugs; 
+          this.appService.setSymptom2drugs(drugs);
+          // this.drugsList = drugs;
+          console.log('mkm' + drugs);
+          // this.loadedFlag = false;
+        }
+      )
             connection.manager.find(Books).then(
                 persons => {
                     this.appService.setBooks(persons);
@@ -37,7 +50,7 @@ export class AppComponent implements OnInit {
             connection.manager.find(Clinexams).then(
                 ceData => {
                     this.appService.setClineExams(ceData)
-                    console.log('mk7m'+ ceData);
+                    // console.log('mk7m'+ ceData);
                     // this.loadedFlag = true;
                 }
             )
@@ -69,7 +82,7 @@ export class AppComponent implements OnInit {
 }
 
     ngOnInit() {
-      this.navList = [ "Case Details", "Search", "Disease Readable", "Repet"]
+      this.navList = [ "Case Details", "Disease Search", "Disease Readable", "Repertories"]
       this.currentTime = new Date();
       
   this.registrationNumber = this.randomFixedInteger(4);
@@ -80,7 +93,11 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.pow(10, length-1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length-1) - 1));
 }
     navSelection(tab){
-      this.selectedTab = tab;
+        if(!(tab == 'Repertories' && this.symtom2drugslist.length <= 0)){
+            this.selectedTab = tab;
+        }
+
+
       event.preventDefault();
     }
 }

@@ -1,8 +1,8 @@
 <loading *ngIf="loadedFlag">{{ isLoading }}</loading>
 <div *ngIf="!loadedFlag">
-  <div class="col-lg-10 col-lg-offset-2" style="padding-top: 30px;">
+  <div class="col-lg-12 col-lg-offset-2" style="padding-top: 30px;">
     <span>Books</span>&nbsp;&nbsp;
-    <select [(ngModel)]="selectedBook" (change)="onSelected()">
+    <select [(ngModel)]="selectedBook" (change)="onSelected($event)">
       <option>Select</option>
       <option *ngFor="let item of bookList;let i = index" value="{{item.id}}" [selected]="i==0" [ngValue]="item.id">
         {{item.name}}
@@ -10,24 +10,66 @@
     </select>
 
     <span>Chapter</span>&nbsp;&nbsp;
-    <select [(ngModel)]="selectedChapter" (change)="onSelectedChapter()">
+    <select [(ngModel)]="selectedChapter" (change)="onSelectedChapter($event)">
       <option>Select</option>
       <option *ngFor="let chapter of updatedChapter;let i = index" value="{{chapter.id}}" [selected]="i==0"
         [ngValue]="chapter.id">
         {{chapter.name}}
       </option>
     </select>
-    <button class="button" (click)="searchSymptom()">Search</button>
+    <button class="btn button" (click)="searchSymptom()">Search</button>
   </div>
 </div>
-<div style="text-align:center">
+<div style="text-align:center" [hidden]="showTableFlag" >
   <input (input)="onInputChange($event)" class="input" value={{value}}
     placeholder="Tap on the virtual keyboard to start" />
   <div class="simple-keyboard"></div>
+  <button class="btn button" (click)="addtoList()">Add More</button>
+  <button class="btn button" (click)="showTable()">Save</button>
 </div>
 
 <!-- <div class="container"><h2>Example 3 </h2></div> -->
-<div id="exTab3" class="tab-container" *ngIf="!loadedFlag">
+<div *ngIf="showTableFlag">
+  <div class="outer">
+    <div class="inner">
+      <table>
+        <tr>
+          <th class=fix></th>
+          <th *ngFor="let medicine of updateddrugList;">{{medicine.name}}</th>
+          <!-- <th>Col 2</th>
+          <th>Col 3</th>
+          <th>Col 4</th>
+          <th class="fix">Col 5</th> -->
+        </tr>
+        <tr *ngFor="let medicine1 of medicineList;">
+          <th class=fix>{{selectedBookName}} {{selectedChapterName}} {{medicine1._symptom}}</th>
+          <!-- <td>col 1 - A</td>
+          <td>col 2 - A (WITH LONGER CONTENT)</td>
+          <td>col 3 - A</td>
+          <td>col 4 - A</td>
+          <td class=fix>col 5 - A</td> -->
+        </tr>
+        <!-- <tr>
+          <th class=fix>Header B</th>
+          <td>col 1 - B</td>
+          <td>col 2 - B</td>
+          <td>col 3 - B</td>
+          <td>col 4 - B</td>
+          <td class=fix>col 5 - B</td>
+        </tr>
+        <tr>
+          <th class=fix>Header C</th>
+          <td>col 1 - C</td>
+          <td>col 2 - C</td>
+          <td>col 3 - C</td>
+          <td>col 4 - C</td>
+          <td class=fix>col 5 - C</td>
+        </tr> -->
+      </table>
+    </div>
+  </div>
+</div>
+<div id="exTab3" class="tab-container" *ngIf="!loadedFlag && !showTableFlag">
 
   <!-- <div> -->
   <!-- <ul class="nav nav-pills readable-tabs">
@@ -40,19 +82,19 @@
     <div class="tab-content clearfix col-lg-6">
       <div class="tab-pane active" id="1b" *ngIf="toggle">
         <ul class="tree" *ngIf="childList.length > 0">
-          <li *ngFor="let item of childList;" (click)="onSelect(item)">
-            <span class="badge"> {{item._symptom}}</span>
+          <li *ngFor="let item of childList;">
+            <span class="badge" (click)="onSelect(item)"> {{item._symptom}}</span>
 
             <ul *ngIf="item.children.length > 0">
               <ng-container *ngFor="let item2 of item.children;">
                 <li style="color: green;">
-                  <span class="badge"> {{item2._symptom}}</span>
+                  <span class="badge" (click)="onSelect(item2)"> {{item2._symptom}}</span>
 
 
                   <ul *ngIf="item2.children.length > 0">
                     <ng-container *ngFor="let item3 of item2.children;">
                       <li style="color: red;">
-                        <span class="badge"> {{item3._symptom}}</span>
+                        <span class="badge"  (click)="onSelect(item3)"> {{item3._symptom}}</span>
 
                         <!-- <span *ngIf="item1 == item2.parent">
                     {{item2.symptom}}
@@ -91,10 +133,10 @@
     <div class="col-lg-6 selected-tab-content">
       <!-- <div> -->
 
-      <ul *ngIf="symptomListID.length > 0">
-        <ng-container *ngFor="let sympList of symptomListID;">
-          <ng-container *ngFor="let drug of drugsList;">
-            <li *ngIf="drug.id == sympList.drugId" style="text-align: left;">
+      <ul *ngIf="updateddrugList.length > 0">
+        <!-- <ng-container *ngFor="let sympList of symptomListID;"> -->
+          <ng-container *ngFor="let drug of updateddrugList;">
+            <li style="text-align: left;">
               <span class="badge"> {{drug.name}}</span>
 
               <!-- <span *ngIf="item1 == item2.parent">
@@ -102,7 +144,7 @@
                 </span> -->
             </li>
           </ng-container>
-        </ng-container>
+        <!-- </ng-container> -->
       </ul>
       <!-- </div> -->
     </div>

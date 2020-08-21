@@ -10,8 +10,10 @@ import { CaseDetailsComponent } from './case-details/case-details.component';
 import { DiseaseSearchComponent } from './disease-search/disease-search.component';
 import { ReadableComponent } from './readable/readable.component';
 import { RepertoryComponent } from './repertory/repertory.component';
-import { FilterPipe } from './app.pipe';
+// import { FilterPipe } from './app.pipe';
 import { LoadingComponent } from './loading';
+import { HttpClientModule } from '@angular/common/http';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 
@@ -22,9 +24,11 @@ import { LoadingComponent } from './loading';
   imports: [
     BrowserModule,    
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    PdfViewerModule
   ],
-  providers: [DatabaseService, FilterPipe],
+  providers: [DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
