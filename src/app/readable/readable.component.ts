@@ -34,4 +34,5 @@ export class ReadableComponent implements OnInit {
                 return result;
             })
         );
+  }
 }
