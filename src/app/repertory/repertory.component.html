@@ -51,11 +51,12 @@
           <th class="fix">Col 5</th> -->
         </tr>
         <tr *ngFor="let medicine1 of medicineList;let indexOfelement=index;">
-          <th class=fix>{{selectedBookName}} {{selectedChapterName}} {{medicine1._symptom}}</th>
+          <th class=fix>{{selectedBookName}} : {{selectedChapterName}} : {{medicine1._symptom}}</th>
           <ng-container *ngFor="let symptoms of drugLevelLists;">
             <ng-container *ngIf="symptoms.length > 0">
               <td *ngFor="let symptom of symptoms">
-                {{symptom.drugLevel}}</td>
+                {{symptom.drugLevel}}
+              </td>
             </ng-container>
       
         

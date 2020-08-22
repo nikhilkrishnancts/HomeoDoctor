@@ -19,7 +19,11 @@ export class ReadableComponent implements OnInit {
 
   ngOnInit() {
     this.diseaseList = this.appService.getDiseaseList();
-    this.pdfSrc = "../../assets/Abdominalaorticaneurysm.pdf";
+  }
+
+  onSelect(item){
+    this.pdfSrc = decodeURIComponent(`../../assets/files/${item.name}.pdf`);
+    console.log(this.pdfSrc);
   }
 
   getIframe(){

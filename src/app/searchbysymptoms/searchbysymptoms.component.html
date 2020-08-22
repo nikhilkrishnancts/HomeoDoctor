@@ -1,0 +1,61 @@
+<loading *ngIf="loadedFlag">{{ isLoading }}</loading>
+<div *ngIf="!loadedFlag">
+  <div class="col-lg-12 col-lg-offset-2" style="padding-top: 30px;">
+    <span>Books</span>&nbsp;&nbsp;
+    <select [(ngModel)]="selectedBook" (change)="onSelected($event)">
+      <option>Select</option>
+      <option *ngFor="let item of bookList;let i = index" value="{{item.id}}" [selected]="i==0" [ngValue]="item.id">
+        {{item.name}}
+      </option>
+    </select>
+
+    <span>Chapter</span>&nbsp;&nbsp;
+    <select [(ngModel)]="selectedChapter" (change)="onSelectedChapter($event)">
+      <option>Select</option>
+      <option *ngFor="let chapter of updatedChapter;let i = index" value="{{chapter.id}}" [selected]="i==0"
+        [ngValue]="chapter.id">
+        {{chapter.name}}
+      </option>
+    </select>
+
+    <span>Search Terms : </span>&nbsp;&nbsp;<input type="text" placeholder="Search" />&nbsp;&nbsp;
+    <button class="btn button" (click)="searchSymptom()">Search</button>
+  </div>
+</div>
+
+<div id="exTab3" class="tab-container">
+<div class="col-lg-12" style="display: inline-flex;
+        width: 100%;">
+    <div class="tab-content clearfix col-lg-6">
+      <div class="tab-pane active" id="1b" *ngIf="toggle">
+        <ul class="tree" *ngIf="childList.length > 0">
+          <li *ngFor="let item of childList;">
+            <span class="badge" (click)="onSelect(item)"> {{item._symptom}}</span>
+
+            <ul *ngIf="item.children.length > 0">
+              <ng-container *ngFor="let item2 of item.children;">
+                <li style="color: green;">
+                  <span class="badge" (click)="onSelect(item2)"> {{item2._symptom}}</span>
+
+
+                  <ul *ngIf="item2.children.length > 0">
+                    <ng-container *ngFor="let item3 of item2.children;">
+                      <li style="color: red;">
+                        <span class="badge"  (click)="onSelect(item3)"> {{item3._symptom}}</span>
+                      </li>
+                    </ng-container>
+
+                  </ul>
+                </li>
+              </ng-container>
+
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <button class="btn button" (click)="searchSymptom()">Save File</button>
+</div>

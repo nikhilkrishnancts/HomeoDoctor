@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import Keyboard from "simple-keyboard";
-// import { FilterPipe } from '../app.pipe';
 import { DatabaseService } from '../data-access/database.service';
 import { Symptom } from '../data-access/entities/symptoms';
 import { Sym2drugs } from '../data-access/entities/symptom2drug';
@@ -12,7 +11,6 @@ import { Equal } from 'typeorm';
   selector: 'app-repertory',
   templateUrl: './repertory.component.html',
   styleUrls: ['./repertory.component.scss'],
-  // providers: [FilterPipe]
 })
 export class RepertoryComponent implements OnInit {
   bookList: any;
@@ -46,21 +44,11 @@ export class RepertoryComponent implements OnInit {
 
   constructor(private databaseService: DatabaseService, private appService: AppService) {
     this.databaseService.connection.then(async connection => {
-      // connection.manager.find(Symptom).then(
-      //   symptom => {
-      //     this.appService.setSymptomList(symptom)
-
-      //     this.updatedSymptomList = this.symptomList = this.appService.getSymptomList();
-      //     // console.log('mkm'+ chapter);
-
-      //   }
-      // )
-
+      
       connection.manager.find(Drugs).then(
         drugs => {
           this.appService.setDrugs(drugs);
           this.drugsList = drugs;
-          // console.log('mkm' + drugs);
           this.loadedFlag = false;
         }
       )
@@ -82,7 +70,6 @@ export class RepertoryComponent implements OnInit {
 
   onSelected(event) {
     this.selectedBookName = event.target.options[this.selectedBook].innerText;
-    // console.log(this.selectedBook);
     let selectedId = this.selectedBook;
     this.updatedChapter = this.chapterList.filter(function (number) {
       return (number.bookId === selectedId);
@@ -95,9 +82,9 @@ export class RepertoryComponent implements OnInit {
   }
 
   addtoList(){
-this.medicineList.push(this.selectedItem);
-this.drugLevelLists.push(this.getArray(this.symptomListID));
-this.newDrugsList.push(this.updateddrugList);
+    this.medicineList.push(this.selectedItem);
+    this.drugLevelLists.push(this.getArray(this.symptomListID));
+    this.newDrugsList.push(this.updateddrugList);
   }
 
   showTable(){
@@ -115,41 +102,14 @@ this.showTableFlag = true;
     let selectChapter = this.selectedChapter;
     this.symptomListID = this.symptom2drugs.filter(function (number) {
       return (number.bookId == selectedId && number.chapterId == selectChapter && number.symptomId == symptomid);
-    });
- 
-    
-    // this.databaseService.connection.then(async connection => {
-    // const qb = connection.createQueryBuilder().select("sym") 
-    // .from(Sym2drugs, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
-    // .andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).andWhere("sym.symptomId = :symptomId", {symptomId: symptomid}).getMany();
-    
-    //     qb.then( async response => {
-    //       console.log("in check:" +response)
-    //       this.symptomListID = response;
-    //       if (this.symptomListID.length)
-    //      //  this.childList = this.getTree();
-    //       this.loadedFlag = false;
-    //     });
-    //   });  
+    }); 
       
       if (this.symptomListID.length){
-        // this.loadedFlag = false;
-        // let drugone ;
-        // let druglst = this.drugsList;
-        // let updateddruglist = this.updateddrugList;
-        // this.updateddrugList = updateddruglist;
-        this.updateddrugList = this.drugsList.filter((elem) => this.symptomListID.find(({ drugId }) => elem.id === drugId));
-        // this.symptomListID.filter(function (number) {
-        //  drugone = druglst.filter(function(drug){
-        //      (drug.id == number.drugId);
-        //  }
-        //   )
-        //   if(drugone.length)
-        //   updateddruglist.push(drugone);
-          
-        // });
+        
+        this.updateddrugList = this.drugsList.filter((elem) => this.symptomListID.
+        find(({ drugId }) => elem.id === drugId));
+        
         if(this.updateddrugList.length){
-         //  this.updateddrugList = updateddruglist;
           this.loadedFlag = false;
         }
       }
@@ -159,63 +119,27 @@ this.showTableFlag = true;
   }
 
   searchSymptom() {
-    //  this.symptomList = this.appService.getSymptomList();
     let selectedId = this.selectedBook;
     let selectChapter = this.selectedChapter;
     this.childList = [];
-    console.log("in 23")
-    // this.updatedSymptomList = this.symptomList.filter(function (number) {
-    //   return (number.bookId === selectedId && number.chapterId === selectChapter);
-    // });
-    
     this.loadedFlag = true;
 
     
     this.databaseService.connection.then(async connection => {
-    //   const symptomLst = new Symptom();
-    /*const user = connection.createQueryBuilder() 
-    .select("sym") 
-    .from(Symptom, "sym") 
-    .where("sym.id = :id", { id: 1 }) .getOne();
-    qb.andWhere("account.password = :password", {password: password});*/
 
     const qb = connection.createQueryBuilder().select("sym") 
 .from(Symptom, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
 .andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).getMany();
 
     qb.then( async response => {
-      console.log("in check:" +response)
       this.updatedSymptomList = response;
       if (this.updatedSymptomList.length)
       this.childList = this.getTree();
       this.loadedFlag = false;
     });
     
-    // const sym2drugs = new Sym2drugs();
-    // sym2drugs.bookId = selectedId;
-    // sym2drugs.chapterId = selectChapter;
-    // await connection.manager.save(sym2drugs);
-    let symptomRepository = connection.getRepository(Symptom);
-    let photoRepository = connection.getRepository(Sym2drugs);
-    //let photos = await photoRepository.find({ bookId: selectedId, chapterId: selectChapter });
-    // let symptom2drug = await photoRepository.find({ bookId: selectedId, chapterId: selectChapter })
-    //symptomRepository.find({ bookId:  Equal(selectedId), chapterId: Equal(selectChapter) })
-    //.then(async response1 => {
-      //this.updatedSymptomList = response1;
-      //this.loadedFlag = false;
-    // });
-    // photoRepository.find({ bookId: selectedId, chapterId: selectChapter })
-    // .then(async response => {
-    //       // const symptom2drug = await Sym2drugs.find();
-    //       this.updatedSymptomList2 = this.symptom2drugs = response;
-    //       this.loadedFlag = false;
-    //         }
-    //       )
     });
     
-    
-
-    console.log("in 4" + this.childList)
     this.toggle = true;
   }
 
@@ -249,26 +173,7 @@ this.showTableFlag = true;
         const itemId = item['id']
         const parent = item['parent']
 
-        /*
-         * Check whether item already exists in the lookup table. If not,
-         * add a placeholder. We'll add the details later.
-         */
-        // let symptomListID = symptomlist.filter(function(number) {
-        //   return (number.bookId === item['bookId'] && number.chapterId === item['chapterId'] && number.symptomId == item['symptomId']);
-        // });
-        // let drugsSymp = [];
-        // let drugLists = [];
-        // drugLists = symptomListID.filter(function(number) {
-        //   drugsSymp = druglist.filter(function(drug) {
-        //     return (drug.id === number.drugId);
-        //   })
-        //   number['drugs'].push(drugsSymp);
-        //   // return (number.drugId === item['bookId'] && number.chapterId === item['chapterId'] && number.symptomId == item['symptomId']);
-        // });
-
-        // let drugs = druglist.filter(function(number) {
-        //   return (number.id === item['bookId'] && number.chapterId === item['chapterId'] && number.symptomId == item['symptomId']);
-        // });
+        
         if (!lookup[itemId]) lookup[itemId] = { ['children']: [], ['drugs']: [] }
 
         /*
