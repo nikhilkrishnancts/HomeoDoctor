@@ -82,7 +82,7 @@ export class AppComponent implements OnInit {
 }
 
     ngOnInit() {
-      this.navList = [ "Case Details", "Disease Search", "Disease Readable", "Repertories"]
+      this.navList = [ "Case Details", "Disease Search", "Disease Readable", "Repertories", "Search"]
       this.currentTime = new Date();
       
   this.registrationNumber = this.randomFixedInteger(4);

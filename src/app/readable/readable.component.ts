@@ -34,5 +34,20 @@ export class ReadableComponent implements OnInit {
                 return result;
             })
         );
-  }
+}
+public openPdf() {
+  let url = "assets/Abdominalaorticaneurysm.pdf"; // E.g. http://localhost:3000/api/GetMyPdf
+  // url can be local url or remote http request to an api/pdf file. 
+  // E.g: let url = "assets/pdf-sample.pdf";
+  // E.g: https://github.com/intbot/ng2-pdfjs-viewer/tree/master/sampledoc/pdf-sample.pdf
+  // E.g: http://localhost:3000/api/GetMyPdf
+  // Please note, for remote urls to work, CORS should be enabled at the server. Read: https://enable-cors.org/server.html
+
+  this.downloadFile(url).subscribe(
+  (res) => {
+      this.pdfSrc = res; // pdfSrc can be Blob or Uint8Array
+      // this.pdfViewerOnDemand.refresh(); // Ask pdf viewer to load/reresh pdf
+    }
+  );
+}
 }

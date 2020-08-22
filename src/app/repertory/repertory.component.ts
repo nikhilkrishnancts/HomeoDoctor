@@ -6,6 +6,7 @@ import { DatabaseService } from '../data-access/database.service';
 import { Symptom } from '../data-access/entities/symptoms';
 import { Sym2drugs } from '../data-access/entities/symptom2drug';
 import { Drugs } from '../data-access/entities/drugs';
+import { Equal } from 'typeorm';
 
 @Component({
   selector: 'app-repertory',

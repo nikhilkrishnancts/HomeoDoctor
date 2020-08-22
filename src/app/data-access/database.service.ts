@@ -21,7 +21,7 @@ export class DatabaseService {
             host: 'localhost',
             port: 3306,
             username: 'root',
-            password: 'admin',
+            password: 'root',
             database: 'homdb',
             acquireTimeout: 900000,
             entities: [
@@ -40,6 +40,7 @@ export class DatabaseService {
             synchronize: false,
             logging: false
         };
-        this.connection = createConnection(this.options);
+        this.connection =  createConnection(this.options);
+
     }
 }

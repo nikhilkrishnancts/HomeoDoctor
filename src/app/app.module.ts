@@ -14,12 +14,13 @@ import { RepertoryComponent } from './repertory/repertory.component';
 import { LoadingComponent } from './loading';
 import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SearchbysymptomsComponent } from './searchbysymptoms/searchbysymptoms.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, SidebarDirective, CaseDetailsComponent, DiseaseSearchComponent, ReadableComponent, RepertoryComponent, LoadingComponent
+    AppComponent, SidebarDirective, CaseDetailsComponent, DiseaseSearchComponent, ReadableComponent, RepertoryComponent, LoadingComponent, SearchbysymptomsComponent
   ],
   imports: [
     BrowserModule,    

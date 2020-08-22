@@ -15,8 +15,8 @@ export class Sym2drugs extends BaseEntity {
     private _chapterId: number = undefined;
     @Column({ name: 'symptomId' })
     private _symptomId: number = undefined;
-    // @Column({ name: 'symptom' })
-    // private _symptom: string = undefined;
+    @Column({ name: 'drugLevel' })
+    private _drugLevel: string = undefined;
     // @Column({ name: 'person_birth_year' })
     // private _birthYear: number = undefined;
     // @Column({ name: 'person_deleted' })
@@ -65,9 +65,9 @@ export class Sym2drugs extends BaseEntity {
     }
 
 
-    // public get symptom(): string {
-    //     return this._symptom;
-    // }
+    public get drugLevel(): string {
+        return this._drugLevel;
+    }
 
 
     // public get birthYear(): number {
@@ -120,9 +120,9 @@ export class Sym2drugs extends BaseEntity {
     }
 
 
-    // public set symptomlevel(value: string) {
-    //     this._symptomLevel = value;
-    // }
+    public set drugLevel(value: string) {
+        this._drugLevel = value;
+    }
 
 
     // public set fathername(value: string) {
