@@ -41,6 +41,7 @@ export class RepertoryComponent implements OnInit {
   symptomId: any;
   updateddrugList: any= [];
   newDrugsList: any = [];
+  filterString: any = '';
 
   constructor(private databaseService: DatabaseService, private appService: AppService) {
     this.databaseService.connection.then(async connection => {
@@ -131,6 +132,11 @@ this.showTableFlag = true;
 .from(Symptom, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
 .andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).getMany();
 
+// const qb = connection.createQueryBuilder().select("sym") 
+// .from(Symptom, "sym")
+//     .leftJoinAndSelect(Sym2drugs, "sym2drugs", "sym2drugs.symptomId = sym.id")
+//     .getMany();
+
     qb.then( async response => {
       this.updatedSymptomList = response;
       if (this.updatedSymptomList.length)
@@ -172,6 +178,9 @@ this.showTableFlag = true;
 
         const itemId = item['id']
         const parent = item['parent']
+        // let updateddrugList = druglist.filter((elem) => elem.id === itemId);
+
+        // console.log(updateddrugList + 'huj');
 
         
         if (!lookup[itemId]) lookup[itemId] = { ['children']: [], ['drugs']: [] }

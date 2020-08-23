@@ -10,7 +10,7 @@ import { CaseDetailsComponent } from './case-details/case-details.component';
 import { DiseaseSearchComponent } from './disease-search/disease-search.component';
 import { ReadableComponent } from './readable/readable.component';
 import { RepertoryComponent } from './repertory/repertory.component';
-// import { FilterPipe } from './app.pipe';
+import { FilterPipe } from './app.pipe';
 import { LoadingComponent } from './loading';
 import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -19,8 +19,9 @@ import { SearchbysymptomsComponent } from './searchbysymptoms/searchbysymptoms.c
 
 
 @NgModule({
-  declarations: [
-    AppComponent, SidebarDirective, CaseDetailsComponent, DiseaseSearchComponent, ReadableComponent, RepertoryComponent, LoadingComponent, SearchbysymptomsComponent
+  declarations: [FilterPipe,
+    AppComponent, SidebarDirective, CaseDetailsComponent, DiseaseSearchComponent, ReadableComponent, RepertoryComponent,
+     LoadingComponent, SearchbysymptomsComponent 
   ],
   imports: [
     BrowserModule,    
