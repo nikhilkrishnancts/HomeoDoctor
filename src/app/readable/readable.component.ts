@@ -22,7 +22,7 @@ export class ReadableComponent implements OnInit {
   }
 
   onSelect(item){
-    this.pdfSrc = decodeURIComponent(`../../assets/files/${item.name}.pdf`);
+    this.pdfSrc = "../../assets/files/"+item.name+".pdf";
     console.log(this.pdfSrc);
   }
 

@@ -17,7 +17,7 @@
         <div class="tab-pane" id="1b" *ngIf="!toggle" [ngClass]="!toggle ? 'active' : ''">
           <ul class="tree">
             <li *ngFor="let item of cliexams" (click)="onSelect(item)">
-              <span class="badge">{{item.expr}}</span>
+              <span class="badge">{{item.name}}</span>
             </li>
             
           </ul>
@@ -25,7 +25,7 @@
         <div class="tab-pane" id="2b" *ngIf="toggle"[ngClass]="toggle ? 'active' : ''">
           <ul class="tree">
             <li *ngFor="let item of clinSymptoms" (click)="onSelect(item)">
-              <span class="badge">{{item.expr}}</span>
+              <span class="badge">{{item.name}}</span>
             </li>
             
           </ul>
