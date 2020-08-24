@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
           this.symtom2drugslist =drugs; 
           this.appService.setSymptom2drugs(drugs);
           // this.drugsList = drugs;
-          console.log('mkm' + drugs);
+          //console.log('mkm' + drugs);
           // this.loadedFlag = false;
         }
       )
