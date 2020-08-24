@@ -1,14 +1,14 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne } from 'typeorm';
 // import { User } from './user';
 
-@Entity({ name: 'diseases' })
-export class Diseases extends BaseEntity {
-    @PrimaryGeneratedColumn({ name: 'ID' })
+@Entity({ name: 'diseases2symptoms' })
+export class Disease2Symptoms extends BaseEntity {
+    @PrimaryGeneratedColumn({ name: 'id' })
     private _id: number = undefined;
-    @Column({ name: 'Name' })
-    private _name: string = undefined;
-    // @Column({ name: 'image' })
-    // private _image: string = undefined;
+    @Column({ name: 'did' })
+    private _did: number = undefined;
+    @Column({ name: 'syid' })
+    private _syid: number = undefined;
     // @Column({ name: 'readonly' })
     // private _readonly: string = undefined;
     // @Column({ name: 'person_address' })
@@ -40,14 +40,14 @@ export class Diseases extends BaseEntity {
     // }
 
 
-    public get name(): string {
-        return this._name;
+    public get did(): number {
+        return this._did;
     }
 
 
-    // public get image(): string {
-    //     return this._image;
-    // }
+    public get syid(): number {
+        return this._syid;
+    }
 
 
     // public get readonly(): string {
@@ -95,14 +95,14 @@ export class Diseases extends BaseEntity {
     }
 
 
-    public set name(value: string) {
-        this._name = value;
+    public set did(value: number) {
+        this._did = value;
     }
 
 
-    // public set image(value: string) {
-    //     this._image = value;
-    // }
+    public set syid(value: number) {
+        this._syid = value;
+    }
 
 
     // public set readonly(value: string) {
