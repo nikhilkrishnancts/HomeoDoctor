@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { Symptom } from './symptoms';
 // import { User } from './user';
 
@@ -27,7 +27,8 @@ export class Sym2drugs extends BaseEntity {
     // private _workAddress: string = undefined;
     // @Column({ name: 'person_work_phonenum' })
     // private _workPhone: string = undefined;
-   
+    // @OneToOne(type => Symptom, symptom => symptom.id)
+    // symptom: Symptom;
 
     // @OneToOne(type => Symptom, user => user.id, {lazy: true})
     // private _symptom: Symptom = undefined;

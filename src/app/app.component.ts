@@ -12,8 +12,8 @@ import { Chapter } from './data-access/entities/chapters';
 import { async } from '@angular/core/testing';
 import { Drugs } from './data-access/entities/drugs';
 import { Sym2drugs } from './data-access/entities/symptom2drug';
-// import { Disease2Symptoms } from './data-access/entities/disease2symptoms';
-// import { Disease2Clinexams } from './data-access/entities/disease2clinexams';
+import { Disease2Symptoms } from './data-access/entities/disease2symptoms';
+import { Disease2Clinexams } from './data-access/entities/disease2clinexams';
 
 
 
@@ -71,21 +71,21 @@ export class AppComponent implements OnInit {
                 }
             )
 
-        //     connection.manager.find(Disease2Symptoms).then(
-        //       disease => {
-        //           this.appService.setDiseaseSymptoms(disease)
-        //           // console.log('mkm'+ disease);
-        //           // this.loadedFlag = true;
-        //       }
-        //   )
+            connection.manager.find(Disease2Symptoms).then(
+              disease => {
+                  this.appService.setDiseaseSymptoms(disease)
+                  // console.log('mkm'+ disease);
+                  // this.loadedFlag = true;
+              }
+          )
 
-        //   connection.manager.find(Disease2Clinexams).then(
-        //     disease => {
-        //         this.appService.setDisease2ClinExams(disease)
-        //         // console.log('mkm'+ disease);
-        //         // this.loadedFlag = true;
-        //     }
-        // )
+          connection.manager.find(Disease2Clinexams).then(
+            disease => {
+                this.appService.setDisease2ClinExams(disease)
+                // console.log('mkm'+ disease);
+                // this.loadedFlag = true;
+            }
+        )
 
             connection.manager.find(Chapter).then(
                 chapter => {
@@ -114,7 +114,7 @@ export class AppComponent implements OnInit {
     navSelection(tab){
         if(!(tab == 'Repertories' && this.symtom2drugslist.length <= 0)){
             this.selectedTab = tab;
-        }
+         }
 
 
       event.preventDefault();

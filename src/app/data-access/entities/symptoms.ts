@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
 import { Sym2drugs } from './symptom2drug';
 // import { User } from './user';
 
@@ -30,8 +30,8 @@ export class Symptom extends BaseEntity {
     // @JoinColumn({name: 'symptomId'})
     // private _sym2drugs: Sym2drugs = undefined;
     // extra
-    // @OneToOne(type => Books, book => book.id, {lazy: true})
-    // private _book: Books = undefined;
+    // @OneToOne(type => Sym2drugs, symptom2drugs => symptom2drugs.symptomId)
+    // symptom2drugs: Sym2drugs[];
 
     public get id(): number {
         return this._id;
