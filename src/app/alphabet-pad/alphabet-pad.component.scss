@@ -1,0 +1,37 @@
+.btn-primary{
+    background-color:rgb(69, 99, 138);
+    color: white;
+    padding:8px;
+    margin:0px 5px;
+}
+
+.btn-primary + .btn-primary{
+    margin-left: 0px;
+}
+
+.input-field{
+    height:30px;
+}
+
+.btn-container{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.btn-alphabet{
+    margin:5px 5px;
+}
+
+.input-container{
+    display: flex;
+    margin:10px 10px;
+}
+
+.btn-group-container{
+    display: flex;
+    justify-content:start;
+}
+
+.btn-space{
+    width:200px;
+}

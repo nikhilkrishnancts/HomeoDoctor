@@ -1,0 +1,16 @@
+<div class="input-container">
+  <input type="text" class="input-field" [value]="searchText"/>
+  <button class="btn btn-primary" (click)="handleSearch(searchText)">Search</button>
+  <button class="btn btn-primary" (click)="handleClear()">Clear</button>
+</div>
+
+<div class="btn-container">
+  <ng-container *ngFor="let alphabet of alphabetArray">
+      <button class='btn btn-primary btn-alphabet' (click)="handleAlphabetClick(alphabet)">{{alphabet}}</button>
+  </ng-container>
+</div>
+
+<div class="btn-group-container">
+<button class="btn btn-primary btn-space" (click)="handleSpaceClick()"></button>
+<button class="btn btn-primary" (click)="handleDeleteClick()">Delete</button>
+</div>

@@ -12,6 +12,8 @@ export class AppService {
   symptomList: any;
   drugs: any;
   symptom2drugs: any;
+  diseaseSymptoms: any;
+  disease2ClinExams: any;
 
   constructor() { }
 
@@ -68,4 +70,21 @@ export class AppService {
   setDiseaseList(value){
     this.diseaseList = value;
   }
+
+  getDiseaseSymptoms(){
+    return this.diseaseSymptoms;
+  }
+
+  setDiseaseSymptoms(value){
+    this.diseaseSymptoms = value;
+  }
+
+    getDisease2ClinExams(){
+    return this.disease2ClinExams;
+  }
+
+  setDisease2ClinExams(value){
+    this.disease2ClinExams = value;
+  }
+
 }

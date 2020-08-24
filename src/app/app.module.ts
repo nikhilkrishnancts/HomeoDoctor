@@ -15,13 +15,13 @@ import { LoadingComponent } from './loading';
 import { HttpClientModule } from '@angular/common/http';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SearchbysymptomsComponent } from './searchbysymptoms/searchbysymptoms.component';
-
+import { AlphabetPadComponent } from './alphabet-pad/alphabet-pad.component';
 
 
 @NgModule({
   declarations: [FilterPipe,
     AppComponent, SidebarDirective, CaseDetailsComponent, DiseaseSearchComponent, ReadableComponent, RepertoryComponent,
-     LoadingComponent, SearchbysymptomsComponent 
+     LoadingComponent, SearchbysymptomsComponent, AlphabetPadComponent 
   ],
   imports: [
     BrowserModule,    
