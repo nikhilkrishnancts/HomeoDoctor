@@ -13,27 +13,28 @@
     </ul>
     <div class="col-lg-12" style="display: inline-flex;
       width: 100%;">
-      <div class="tab-content clearfix col-lg-6">
+      <div class="tab-content clearfix col-lg-3">
         <div class="tab-pane" id="1b" *ngIf="!toggle" [ngClass]="!toggle ? 'active' : ''">
           <ul class="tree">
-            <li *ngFor="let item of cliexams" (click)="onSelect(item)">
-              <span class="badge">{{item.name}}</span>
+            <li *ngFor="let item of cliexams" (click)="onSelect(item, 'ce')">
+              <span class="badge" data-toggle="tooltip" 
+              title="{{item.name}}">{{item.name}}</span>
             </li>
             
           </ul>
         </div>
         <div class="tab-pane" id="2b" *ngIf="toggle"[ngClass]="toggle ? 'active' : ''">
           <ul class="tree">
-            <li *ngFor="let item of clinSymptoms" (click)="onSelect(item)">
+            <li *ngFor="let item of clinSymptoms" (click)="onSelect(item, 'cp')">
               <span class="badge">{{item.name}}</span>
             </li>
             
           </ul>
         </div>
       </div>
-      <div class="col-lg-6 selected-tab-content">
-        <div>
-         {{selectedItem}}
+      <div class="col-lg-9 selected-tab-content">
+        <div *ngFor="let item of ceItemList" >
+         {{item.name}}
         </div>
       </div>
     </div>
