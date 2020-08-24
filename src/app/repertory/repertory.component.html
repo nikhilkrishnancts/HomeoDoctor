@@ -1,30 +1,35 @@
 <loading *ngIf="loadedFlag">{{ isLoading }}</loading>
 <div *ngIf="!loadedFlag">
-  <div class="col-lg-12 col-lg-offset-2" style="padding-top: 30px;">
-    <span>Books</span>&nbsp;&nbsp;
-    <select [(ngModel)]="selectedBook" (change)="onSelected($event)">
-      <option>Select</option>
-      <option *ngFor="let item of bookList;let i = index" value="{{item.id}}" [selected]="i==0" [ngValue]="item.id">
-        {{item.name}}
-      </option>
-    </select>
+  <div class="col-lg-12 col-lg-offset-2 inline-flex" style="padding-top: 30px;">
+    <div class="col-lg-4">
+      <span>Books</span>&nbsp;&nbsp;
+      <select [(ngModel)]="selectedBook" (change)="onSelected($event)" class="dropdown-width">
+        <option>Select</option>
+        <option *ngFor="let item of bookList;let i = index" value="{{item.id}}" [selected]="i==0" [ngValue]="item.id">
+          {{item.name}}
+        </option>
+      </select>
+    </div>
+<div class="col-lg-6 inline-flex">
+  <span>Chapter</span>&nbsp;&nbsp;
+  <select [(ngModel)]="selectedChapter" (change)="onSelectedChapter($event)" class="dropdown-width">
+    <option>Select</option>
+    <option *ngFor="let chapter of updatedChapter;let i = index" value="{{chapter.id}}" [selected]="i==0"
+      [ngValue]="chapter.id">
+      {{chapter.name}}
+    </option>
+  </select>
+  <button class="btn button" (click)="searchSymptom()">Search</button>
+</div>
 
-    <span>Chapter</span>&nbsp;&nbsp;
-    <select [(ngModel)]="selectedChapter" (change)="onSelectedChapter($event)">
-      <option>Select</option>
-      <option *ngFor="let chapter of updatedChapter;let i = index" value="{{chapter.id}}" [selected]="i==0"
-        [ngValue]="chapter.id">
-        {{chapter.name}}
-      </option>
-    </select>
-    <button class="btn button" (click)="searchSymptom()">Search</button>
+
   </div>
 </div>
 <div style="text-align:center" [hidden]="showTableFlag" >
   <!--<input (input)="onInputChange($event)" class="input" value={{filterString}}
     placeholder="Tap on the virtual keyboard to start" [(ngModel)]="filterString" />
   <div class="simple-keyboard"></div>-->
-<app-alphabet-pad [searchText]="filterString"></app-alphabet-pad>
+<app-alphabet-pad [searchText]="filterString" (valueChange)="getValue($event)"></app-alphabet-pad>
   <button class="btn button" (click)="addtoList()">Record</button>
   <button class="btn button" (click)="showTable()">Repertorize</button>
 </div>

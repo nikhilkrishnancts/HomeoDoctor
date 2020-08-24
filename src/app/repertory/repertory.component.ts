@@ -119,6 +119,9 @@ this.showTableFlag = true;
     console.log(item);
   }
 
+  getValue(event){
+this.filterString = event;
+  }
   searchSymptom() {
     let selectedId = this.selectedBook;
     let selectChapter = this.selectedChapter;

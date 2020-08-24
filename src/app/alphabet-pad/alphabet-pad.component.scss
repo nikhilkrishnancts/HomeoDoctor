@@ -16,6 +16,9 @@
 .btn-container{
     display:flex;
     flex-wrap:wrap;
+    width: 500px;
+    text-align: center;
+    display: block;
 }
 
 .btn-alphabet{
@@ -30,8 +33,12 @@
 .btn-group-container{
     display: flex;
     justify-content:start;
+    width: 500px;
+    text-align: center;
+    display: block;
 }
 
 .btn-space{
     width:200px;
+    height: 42px;
 }

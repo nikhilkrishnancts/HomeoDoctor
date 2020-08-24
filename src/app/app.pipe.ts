@@ -6,6 +6,6 @@ export class FilterPipe implements PipeTransform {
     if (!values || !values.length) return [];
     if (!filter) return values;
 
-    return values.filter(v => v._symptom.indexOf(filter) >= 0);
+    return values.filter(v => v._symptom.toLowerCase().indexOf(filter.toLowerCase()) >= 0);
   }
 }
