@@ -8,6 +8,8 @@ import { Chapter } from './entities/chapters';
 import { Symptom } from './entities/symptoms';
 import { Sym2drugs } from './entities/symptom2drug';
 import { Drugs } from './entities/drugs';
+import { Disease2Clinexams } from './entities/disease2clinexams';
+import { Disease2Symptoms } from './entities/disease2symptoms';
 
 @Injectable()
 export class DatabaseService {
@@ -21,9 +23,9 @@ export class DatabaseService {
             host: 'localhost',
             port: 3306,
             username: 'root',
-            password: 'root',
+            password: 'admin',
             database: 'homdb',
-            acquireTimeout: 900000,
+            connectTimeout: 900000,
             entities: [
                 Books,
                 Clinexams,
@@ -32,7 +34,9 @@ export class DatabaseService {
                 Chapter,
                 Symptom,
                 Sym2drugs,
-                Drugs
+                Drugs,
+                Disease2Clinexams,
+                Disease2Symptoms
             ],
             extra: {
                 connectionLimit: 100
