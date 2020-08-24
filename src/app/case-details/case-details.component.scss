@@ -24,7 +24,7 @@ input:focus{
 
   #exTab3 .nav-tabs > .active {
     border-radius: 4px 4px 0 0 ;
-    background-color: #6e8000 !important;
+    background-color: blue !important;
   }
 
   #exTab3 .tab-content {
@@ -84,4 +84,10 @@ cursor: pointer;
    ul.tree li:last-child:before {
       border-left:1px solid rgb(100,100,100);   
    }
-  
+  .badge{
+    white-space: nowrap; 
+  width: 200px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  text-align: left !important;
+  }

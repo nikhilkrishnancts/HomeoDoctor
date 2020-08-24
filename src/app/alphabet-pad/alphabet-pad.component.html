@@ -1,5 +1,5 @@
 <div class="input-container">
-  <input type="text" class="input-field" [value]="searchText"/>
+  <input type="text" class="input-field" [value]="searchText" [(ngModel)]="searchText"/>
   <button class="btn btn-primary" (click)="handleSearch(searchText)">Search</button>
   <button class="btn btn-primary" (click)="handleClear()">Clear</button>
 </div>

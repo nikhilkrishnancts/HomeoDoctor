@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-alphabet-pad',
@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class AlphabetPadComponent implements OnInit {
 
   alphabetArray=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-  searchText = '';
+  //searchText = '';
   str='';
+  @Input() searchText ; 
   constructor() { }
 
   ngOnInit() {

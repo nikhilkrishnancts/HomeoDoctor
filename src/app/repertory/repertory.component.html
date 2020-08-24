@@ -24,7 +24,7 @@
   <!--<input (input)="onInputChange($event)" class="input" value={{filterString}}
     placeholder="Tap on the virtual keyboard to start" [(ngModel)]="filterString" />
   <div class="simple-keyboard"></div>-->
-<app-alphabet-pad></app-alphabet-pad>
+<app-alphabet-pad [searchText]="filterString"></app-alphabet-pad>
   <button class="btn button" (click)="addtoList()">Record</button>
   <button class="btn button" (click)="showTable()">Repertorize</button>
 </div>
