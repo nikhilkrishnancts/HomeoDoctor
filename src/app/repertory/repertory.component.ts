@@ -57,6 +57,7 @@ export class RepertoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.symptomList = this.appService.getSymptomList();
     this.symptom2drugs = this.appService.getSymptom2drugs();
     this.bookList = this.appService.getBooks();
     this.updatedChapter = this.chapterList = this.appService.getChapter();
@@ -129,25 +130,34 @@ this.filterString = event;
     this.loadedFlag = true;
 
     
-    this.databaseService.connection.then(async connection => {
+//     this.databaseService.connection.then(async connection => {
 
-    const qb = connection.createQueryBuilder().select("sym") 
-.from(Symptom, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
-.andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).getMany();
+//     const qb = connection.createQueryBuilder().select("sym") 
+// .from(Symptom, "sym").where("sym.bookId = :bookId", { bookId: selectedId })
+// .andWhere("sym.chapterId = :chapterId", {chapterId: selectChapter}).getMany();
 
-// const qb = connection.createQueryBuilder().select("sym") 
-// .from(Symptom, "sym")
-//     .leftJoinAndSelect(Sym2drugs, "sym2drugs", "sym2drugs.symptomId = sym.id")
-//     .getMany();
+// // const qb = connection.createQueryBuilder().select("sym") 
+// // .from(Symptom, "sym")
+// //     .leftJoinAndSelect(Sym2drugs, "sym2drugs", "sym2drugs.symptomId = sym.id")
+// //     .getMany();
 
-    qb.then( async response => {
-      this.updatedSymptomList = response;
-      if (this.updatedSymptomList.length)
+//     qb.then( async response => {
+//       this.updatedSymptomList = response;
+//       if (this.updatedSymptomList.length)
+//       this.childList = this.getTree();
+//       this.loadedFlag = false;
+//     });
+    
+//     });
+    this.updatedSymptomList = this.symptomList.filter(function (number) {
+      return (number.bookId == selectedId && number.chapterId == selectChapter);
+    });
+    if (this.updatedSymptomList.length){
       this.childList = this.getTree();
       this.loadedFlag = false;
-    });
-    
-    });
+    }
+   
+      
     
     this.toggle = true;
   }

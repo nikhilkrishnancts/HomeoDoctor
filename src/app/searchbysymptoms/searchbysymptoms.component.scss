@@ -129,6 +129,17 @@ ul.tree, ul.tree ul {
     margin-left: 190px;
   }
 
-  // table, td {
-  //   border: 1px solid black;
-  // }
+  .button {
+    background-color: #000000;
+    border: none;
+    color: white;
+    // padding: 2px 53px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin: 0px 14px;
+    margin-bottom: 9px;
+  }

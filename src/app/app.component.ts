@@ -14,6 +14,7 @@ import { Drugs } from './data-access/entities/drugs';
 import { Sym2drugs } from './data-access/entities/symptom2drug';
 import { Disease2Symptoms } from './data-access/entities/disease2symptoms';
 import { Disease2Clinexams } from './data-access/entities/disease2clinexams';
+import { Symptom } from './data-access/entities/symptoms';
 
 
 
@@ -37,6 +38,16 @@ export class AppComponent implements OnInit {
         drugs => {
           this.symtom2drugslist =drugs; 
           this.appService.setSymptom2drugs(drugs);
+          // this.drugsList = drugs;
+          //console.log('mkm' + drugs);
+         this.loadedFlag = false;
+        }
+      )
+
+      connection.manager.find(Symptom).then(
+        symptoms => {
+          // this.symtom2drugslist =drugs; 
+          this.appService.setSymptomList(symptoms);
           // this.drugsList = drugs;
           //console.log('mkm' + drugs);
           // this.loadedFlag = false;
@@ -91,7 +102,7 @@ export class AppComponent implements OnInit {
                 chapter => {
                     this.appService.setChapter(chapter)
                     // console.log('mkm'+ chapter);
-                    this.loadedFlag = false;
+                    // this.loadedFlag = false;
                 }
             )
           

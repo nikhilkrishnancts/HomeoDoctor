@@ -1,7 +1,7 @@
 <loading *ngIf="loadedFlag">{{ isLoading }}</loading>
 <div *ngIf="!loadedFlag">
   <div class="col-lg-12 col-lg-offset-2 inline-flex" style="padding-top: 30px;">
-    <div class="col-lg-4">
+    <div class="col-lg-4 inline-flex">
       <span>Books</span>&nbsp;&nbsp;
       <select [(ngModel)]="selectedBook" (change)="onSelected($event)" class="dropdown-width">
         <option>Select</option>
